@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      0.1
+// @version      0.2
 // @description  Predicts upcoming Buyee coupons
 // @author       CompanionKitteh
 // @match        https://buyee.jp/mycoupon/*
@@ -65,7 +65,10 @@ function updateCouponInfo(coupons, done) {
 // @param coupon A coupon to pretty print
 // @return A pretty print of the coupon
 function prettyPrintCoupon(coupon) {
-    return `<strong>${coupon.percentOff}% off of ${coupon.category}</strong><br>from ${coupon.usagePeriod.startDate}<br>to ${coupon.usagePeriod.endDate}.`;
+    let now = new Date();
+    let startDateText = `<span ${coupon.usagePeriod.startDate < now ? 'style="color:red;"' : ''}>${coupon.usagePeriod.startDate}</span>`;
+    let endDateText = `<span ${coupon.usagePeriod.endDate < now ? 'style="color:red;"' : ''}>${coupon.usagePeriod.endDate}</span>`;
+    return `<strong>${coupon.percentOff}% off of ${coupon.category}</strong><br>from ${startDateText}<br>to ${endDateText}.`;
 }
 
 // @param string A string to pad with zeroes

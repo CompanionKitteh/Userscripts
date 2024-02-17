@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      0.2
+// @version      0.3
 // @description  Predicts upcoming Buyee coupons
 // @author       CompanionKitteh
 // @match        https://buyee.jp/mycoupon/*
@@ -36,7 +36,7 @@ async function go() {
             url = url.replace("nn", zeroPad(couponNumber, 2));
             let siteHtml = await makeGetRequest(url);
             if (!isValidResponse(siteHtml)) break;
-            let coupon = parseCoupon(siteHtml);
+            let coupon = parseCoupon(siteHtml, url);
             coupons.push(coupon);
         }
     }
@@ -68,7 +68,7 @@ function prettyPrintCoupon(coupon) {
     let now = new Date();
     let startDateText = `<span ${coupon.usagePeriod.startDate < now ? 'style="color:red;"' : ''}>${coupon.usagePeriod.startDate}</span>`;
     let endDateText = `<span ${coupon.usagePeriod.endDate < now ? 'style="color:red;"' : ''}>${coupon.usagePeriod.endDate}</span>`;
-    return `<strong>${coupon.percentOff}% off of ${coupon.category}</strong><br>from ${startDateText}<br>to ${endDateText}.`;
+    return `<strong>${coupon.percentOff}% off of ${coupon.category}</strong><a href=${coupon.url}>[link]</a><br>from ${startDateText}<br>to ${endDateText}`;
 }
 
 // @param string A string to pad with zeroes
@@ -108,8 +108,9 @@ function isValidResponse(siteHtml) {
 }
 
 // @param siteHtml A page's HTML
+// @param url The page's URL
 // @return An object containing the coupon information
-function parseCoupon(siteHtml) {
+function parseCoupon(siteHtml, url) {
     const document = new DOMParser().parseFromString(siteHtml, "text/html");
     return {
         usagePeriod: {
@@ -122,5 +123,6 @@ function parseCoupon(siteHtml) {
         },
         category: document.querySelector("#regist_form_wrap > section:nth-child(2) > div").innerText.match(/【.*】/)[0],
         percentOff: document.querySelector("#coupon_info > div > div.couponSubject__coupon > h2 > span").innerText,
+        url: url,
     };
 }

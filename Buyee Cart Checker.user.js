@@ -85,8 +85,7 @@ function updatePrice(element, prices) {
         'NEW_PRICE</span> <span class="g-priceFx" id="fx_total_price_n">NEW_PRICE_FX</span></div>';
     priceDiv = priceDiv.replace("NEW_PRICE", prices.price).replace("NEW_PRICE_FX", prices.priceFx);
     getGGGGGP(element).querySelector("div.itemCard__sumTotalOuter > div").insertAdjacentHTML("afterend", priceDiv);
-    console.log(`prices ${oldPrice} and ${prices.price}`);
-    return oldPrice === prices.price;
+    return oldPrice.slice(0, -3).trim() === prices.price.slice(0, -3).trim();
 }
 
 // @param element An element

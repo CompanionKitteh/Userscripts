@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Cart Checker
 // @namespace    http://companionkitteh.com/
-// @version      0.2
+// @version      0.3
 // @description  Checks items in cart for new prices and status
 // @author       CompanionKitteh
 // @match        https://buyee.jp/myshopping/cart*

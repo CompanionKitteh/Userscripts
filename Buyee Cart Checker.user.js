@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Cart Checker
 // @namespace    http://companionkitteh.com/
-// @version      0.3
+// @version      0.4
 // @description  Checks items in cart for new prices and status
 // @author       CompanionKitteh
 // @match        https://buyee.jp/myshopping/cart*
@@ -62,7 +62,7 @@ function getGGGGGP(element) {
 // @param siteHtml A page's HTML
 // @return Whether or not the page is sold out or is an error page
 function isSoldOutOrError(siteHtml) {
-    return siteHtml.match(/this is original message|This item is sold out./);
+    return siteHtml.match(/this is original message|This item is sold out.|Page not found./);
 }
 
 // @param siteHtml A page's HTML

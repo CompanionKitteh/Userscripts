@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      0.3
+// @version      0.4
 // @description  Predicts upcoming Buyee coupons
 // @author       CompanionKitteh
 // @match        https://buyee.jp/mycoupon/*
@@ -30,12 +30,19 @@ async function go() {
     const percents = [5, 7, 10, 12, 15, 20];
     let coupons = [];
     for (let i = 0; i < percents.length; i++) {
+        let tries = 0;
         for (let couponNumber = 1; ; couponNumber++) {
+            if (tries == 3) break;
             updateCouponInfo(coupons, false);
             let url = constructCouponUrl(percents[i]);
             url = url.replace("nn", zeroPad(couponNumber, 2));
             let siteHtml = await makeGetRequest(url);
-            if (!isValidResponse(siteHtml)) break;
+            if (!isValidResponse(siteHtml)) {
+                tries++;
+                continue;
+            } else {
+                tries = 0;
+            }
             let coupon = parseCoupon(siteHtml, url);
             coupons.push(coupon);
         }
@@ -104,7 +111,7 @@ function makeGetRequest(url) {
 // @param siteHtml A page's HTML
 // @return Whether or not the page is an error page
 function isValidResponse(siteHtml) {
-    return !siteHtml.match(/this is original message/);
+    return !siteHtml.match(/this is original message|We were unable to find the coupon./);
 }
 
 // @param siteHtml A page's HTML

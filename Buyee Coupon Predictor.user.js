@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      0.4
+// @version      1.0
 // @description  Predicts upcoming Buyee coupons
 // @author       CompanionKitteh
 // @match        https://buyee.jp/mycoupon/*
@@ -10,31 +10,36 @@
 // @connect      https://buyee.jp/coupon?code=*
 // ==/UserScript==
 
+const percents = [5, 7, 10, 12, 15, 20];
+const marketplaces = ["mercari", "yahooauction"];
+
 (async () => {
-    let infoCoupon = '<section id="coupon_" class="mycoupon infoCoupon"><h2 class="shopping_cart_name bg_red">' +
-        'Upcoming Coupons' +
-        '</h2><ul><li><div class="coupon_area"><div class="description_area"><dl><dt>' +
-        'Coupon Information' +
-        '</dt><dd>' +
-        'No data...' +
-        '</dd></dl></div><div class="information_area"><dl><dd class="bold coupon-amount">' +
-        '0<span>&nbsp;FOUND</span>' +
-        '</dd></dl><button type="button" class="btn btn_ok infoCouponButton"><i>' +
-        'Search for Coupons' +
-        '</i></button></div></div></li></ul></section>';
-    document.querySelector("#content_inner > div > nav").insertAdjacentHTML("afterend", infoCoupon);
-    document.getElementsByClassName("infoCouponButton")[0].addEventListener("click", () => { go() });
+    for (let i = 0; i < marketplaces.length; i++) {
+        let marketplace = marketplaces[i];
+        let infoCoupon = `<section id="coupon_" class="mycoupon infoCoupon infoCoupon${marketplace}"><h2 class="shopping_cart_name bg_red">` +
+            `Upcoming Coupons - ${marketplace}` +
+            '</h2><ul><li><div class="coupon_area"><div class="description_area"><dl><dt>' +
+            'Coupon Information' +
+            '</dt><dd>' +
+            'No data...' +
+            '</dd></dl></div><div class="information_area"><dl><dd class="bold coupon-amount">' +
+            '0<span>&nbsp;FOUND</span>' +
+            `</dd></dl><button type="button" class="btn btn_ok infoCouponButton infoCouponButton${marketplace}"><i>` +
+            'Search for Coupons' +
+            '</i></button></div></div></li></ul></section>';
+        document.querySelector("#content_inner > div > nav").insertAdjacentHTML("afterend", infoCoupon);
+        document.getElementsByClassName(`infoCouponButton${marketplace}`)[0].addEventListener("click", () => { go(marketplaces[i]) });
+    }
 })();
 
-async function go() {
-    const percents = [5, 7, 10, 12, 15, 20];
+async function go(marketplace) {
     let coupons = [];
     for (let i = 0; i < percents.length; i++) {
         let tries = 0;
         for (let couponNumber = 1; ; couponNumber++) {
             if (tries == 3) break;
-            updateCouponInfo(coupons, false);
-            let url = constructCouponUrl(percents[i]);
+            updateCouponInfo(marketplace, coupons, false);
+            let url = constructCouponUrl(marketplace, percents[i]);
             url = url.replace("nn", zeroPad(couponNumber, 2));
             let siteHtml = await makeGetRequest(url);
             if (!isValidResponse(siteHtml)) {
@@ -43,17 +48,17 @@ async function go() {
             } else {
                 tries = 0;
             }
-            let coupon = parseCoupon(siteHtml, url);
+            let coupon = parseCoupon(siteHtml, marketplace, url);
             coupons.push(coupon);
         }
     }
-    updateCouponInfo(coupons, true);
+    updateCouponInfo(marketplace, coupons, true);
 }
 
 // @param coupons A list of coupons that have been processed so far
 // @param done Whether or not all coupons have been processed
-function updateCouponInfo(coupons, done) {
-    let infoCoupon = document.getElementsByClassName("infoCoupon")[0];
+function updateCouponInfo(marketplace, coupons, done) {
+    let infoCoupon = document.getElementsByClassName(`infoCoupon${marketplace}`)[0];
     let descriptionArea = infoCoupon.querySelector("ul > li > div > div.description_area > dl > dd");
     let informationArea = infoCoupon.querySelector("ul > li > div > div.information_area > dl > dd");
     let couponCount = coupons.length;
@@ -86,12 +91,13 @@ function zeroPad(string, zeroes) {
 }
 
 // @param percent A coupon percentage
-// @return A coupon URL of form https://buyee.jp/coupon?code=mercariYYMM%%nn
-function constructCouponUrl(percent) {
+// @param marketplace A marketplace
+// @return A coupon URL of form https://buyee.jp/coupon?code=marketplaceYYMM%%nn
+function constructCouponUrl(marketplace, percent) {
     const year = zeroPad(new Date().getYear(), 2);
     const month = zeroPad(new Date().getMonth() + 1, 2);
     percent = zeroPad(percent, 2);
-    return `https://buyee.jp/coupon?code=mercari${year}${month}${percent}nn`;
+    return `https://buyee.jp/coupon?code=${marketplace}${year}${month}${percent}nn`;
 }
 
 // @param url A URL to GET
@@ -115,9 +121,10 @@ function isValidResponse(siteHtml) {
 }
 
 // @param siteHtml A page's HTML
+// @param marketplace The coupon's marketplace
 // @param url The page's URL
 // @return An object containing the coupon information
-function parseCoupon(siteHtml, url) {
+function parseCoupon(siteHtml, marketplace, url) {
     const document = new DOMParser().parseFromString(siteHtml, "text/html");
     return {
         usagePeriod: {
@@ -130,6 +137,7 @@ function parseCoupon(siteHtml, url) {
         },
         category: document.querySelector("#regist_form_wrap > section:nth-child(2) > div").innerText.match(/【.*】/)[0],
         percentOff: document.querySelector("#coupon_info > div > div.couponSubject__coupon > h2 > span").innerText,
+        marketplace: marketplace,
         url: url,
     };
 }

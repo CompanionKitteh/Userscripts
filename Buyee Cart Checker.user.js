@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Cart Checker
 // @namespace    http://companionkitteh.com/
-// @version      0.4
+// @version      0.5
 // @description  Checks items in cart for new prices and status
 // @author       CompanionKitteh
 // @match        https://buyee.jp/myshopping/cart*
@@ -68,7 +68,7 @@ function isSoldOutOrError(siteHtml) {
 // @param siteHtml A page's HTML
 // @return An object containing the price information
 function getPrices(siteHtml) {
-    let price = siteHtml.match(/attrContainer__price[^\d]*([^<]*)/);
+    let price = siteHtml.match(/m-goodsDetail__price[^\d]*([^<]*)/);
     let priceFx = siteHtml.match(/attrContainer__priceSmall[^(]*([^<]*)/);
     return {
         price: price === null ? "n/a" : price[1].trim(),

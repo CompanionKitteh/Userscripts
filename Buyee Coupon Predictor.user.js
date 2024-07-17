@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      1.0
+// @version      1.1
 // @description  Predicts upcoming Buyee coupons
 // @author       CompanionKitteh
 // @match        https://buyee.jp/mycoupon/*
@@ -11,7 +11,7 @@
 // ==/UserScript==
 
 const percents = [5, 7, 10, 12, 15, 20];
-const marketplaces = ["mercari", "yahooauction"];
+const marketplaces = ["mercari", "yahooauction", "rakuten"];
 
 (async () => {
     for (let i = 0; i < marketplaces.length; i++) {
@@ -126,6 +126,7 @@ function isValidResponse(siteHtml) {
 // @return An object containing the coupon information
 function parseCoupon(siteHtml, marketplace, url) {
     const document = new DOMParser().parseFromString(siteHtml, "text/html");
+    let category = document.querySelector("#regist_form_wrap > section:nth-child(2) > div").innerText.match(/【.*】/);
     return {
         usagePeriod: {
             startDate: new Date(document.querySelector("#regist_form_wrap > section:nth-child(1) > div.couponDescription__period > dl > dd:nth-child(2)").innerText.split("〜")[0] + " +0900"),
@@ -135,7 +136,7 @@ function parseCoupon(siteHtml, marketplace, url) {
             startDate: new Date(document.querySelector("#regist_form_wrap > section:nth-child(1) > div.couponDescription__period > dl > dd:nth-child(4)").innerText.split("〜")[0] + " +0900"),
             endDate: new Date(document.querySelector("#regist_form_wrap > section:nth-child(1) > div.couponDescription__period > dl > dd:nth-child(4)").innerText.split("〜")[1] + " +0900"),
         },
-        category: document.querySelector("#regist_form_wrap > section:nth-child(2) > div").innerText.match(/【.*】/)[0],
+        category: category ? category[0] : "no category restriction ",
         percentOff: document.querySelector("#coupon_info > div > div.couponSubject__coupon > h2 > span").innerText,
         marketplace: marketplace,
         url: url,

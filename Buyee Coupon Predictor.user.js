@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      2.0
+// @version      2.1
 // @description  Predicts upcoming Buyee coupons
 // @author       CompanionKitteh
 // @match        https://buyee.jp/mycoupon/*
@@ -145,7 +145,7 @@ function parseCoupon(siteHtml, marketplaceURL, url) {
     return {
         usagePeriod: {
             startDate: usagePeriodStartDate > hatsuneMikuBirthday ? usagePeriodStartDate : null,
-            endDate: usagePeriodEndDate > hatsuneMikuBirthday ? usagePeriodStartDate : null,
+            endDate: usagePeriodEndDate > hatsuneMikuBirthday ? usagePeriodEndDate : null,
         },
         entryDate: {
             startDate: entryDateStartDate > hatsuneMikuBirthday ? entryDateStartDate : null,

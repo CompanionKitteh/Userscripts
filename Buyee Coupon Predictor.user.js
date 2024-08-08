@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      2.1
+// @version      2.2
 // @description  Predicts upcoming Buyee coupons
 // @author       CompanionKitteh
 // @match        https://buyee.jp/mycoupon/*
@@ -83,7 +83,11 @@ function updateCouponInfo(marketplaceURL, coupons, done) {
 // @param coupon A coupon to pretty print
 // @return A pretty print of the coupon
 function prettyPrintCoupon(coupon) {
-    let prettyPrint = `<strong>${coupon.percentOff}% off of ${coupon.category}</strong><a href=${coupon.url}>[link]</a>`;
+    let prettyPrint = `<strong>${coupon.percentOff}% off `;
+    if (coupon.category) {
+        prettyPrint += `of ${coupon.category}`
+    }
+    prettyPrint += `</strong><a href=${coupon.url}>[link]</a>`
     if (coupon.usagePeriod.startDate) {
         let now = new Date();
         let startDateText = `<span ${coupon.usagePeriod.startDate < now ? 'style="color:red;"' : ''}>${coupon.usagePeriod.startDate}</span>`;
@@ -151,7 +155,7 @@ function parseCoupon(siteHtml, marketplaceURL, url) {
             startDate: entryDateStartDate > hatsuneMikuBirthday ? entryDateStartDate : null,
             endDate: entryDateEndDate > hatsuneMikuBirthday ? entryDateEndDate : null,
         },
-        category: category ? category[0] : "no category restriction ",
+        category: category ? category[0] : null,
         percentOff: document.querySelector("#coupon_info > div > div.couponSubject__coupon > h2 > span").innerText,
         marketplaceURL: marketplaceURL,
         url: url,

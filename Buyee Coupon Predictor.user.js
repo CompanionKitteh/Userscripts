@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      2.2
+// @version      2.3
 // @description  Predicts upcoming Buyee coupons
 // @author       CompanionKitteh
 // @match        https://buyee.jp/mycoupon/*
@@ -10,7 +10,7 @@
 // @connect      https://buyee.jp/coupon?code=*
 // ==/UserScript==
 
-const percents = [5, 7, 10, 12, 15, 20];
+const percents = [5, 6, 7, 8, 9, 10, 12, 14, 15, 20];
 // marketplaceURL, marketplaceName
 const marketplaces = [["mercariYYMM%%nn", "Mercari"],
                       ["YYMM_newUser_mercari%%nn", "Mercari New User (14 days usage period)"],

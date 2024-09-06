@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      2.3
+// @version      3.0
 // @description  Predicts upcoming Buyee coupons
 // @author       CompanionKitteh
 // @match        https://buyee.jp/mycoupon/*
@@ -13,7 +13,6 @@
 const percents = [5, 6, 7, 8, 9, 10, 12, 14, 15, 20];
 // marketplaceURL, marketplaceName
 const marketplaces = [["mercariYYMM%%nn", "Mercari"],
-                      ["YYMM_newUser_mercari%%nn", "Mercari New User (14 days usage period)"],
                       ["yahooauctionYYMM%%nn", "Yahoo! JAPAN Auction"],
                       ["rakutenYYMM%%nn", "Rakuten"]];
 const hatsuneMikuBirthday = new Date('2007-08-31');
@@ -141,11 +140,11 @@ function isValidResponse(siteHtml) {
 // @return An object containing the coupon information
 function parseCoupon(siteHtml, marketplaceURL, url) {
     const document = new DOMParser().parseFromString(siteHtml, "text/html");
-    let usagePeriodStartDate = new Date(document.querySelector("#regist_form_wrap > section:nth-child(1) > div.couponDescription__period > dl > dd:nth-child(2)")?.innerText.split("〜")[0] + " +0900");
-    let usagePeriodEndDate = new Date(document.querySelector("#regist_form_wrap > section:nth-child(1) > div.couponDescription__period > dl > dd:nth-child(2)")?.innerText.split("〜")[1] + " +0900");
-    let entryDateStartDate = new Date(document.querySelector("#regist_form_wrap > section:nth-child(1) > div.couponDescription__period > dl > dd:nth-child(4)")?.innerText.split("〜")[0] + " +0900");
-    let entryDateEndDate = new Date(document.querySelector("#regist_form_wrap > section:nth-child(1) > div.couponDescription__period > dl > dd:nth-child(4)")?.innerText.split("〜")[1] + " +0900");
-    let category = document.querySelector("#regist_form_wrap > section:nth-child(2) > div").innerText.match(/【.*】/);
+    let usagePeriodStartDate = new Date(document.querySelector("#regist_form_wrap > section > div.couponDescription__period > p:nth-child(2)")?.innerText.split("〜")[0] + " +0900");
+    let usagePeriodEndDate = new Date(document.querySelector("#regist_form_wrap > section > div.couponDescription__period > p:nth-child(2)")?.innerText.split("〜")[1] + " +0900");
+    let entryDateStartDate = new Date(document.querySelector("#regist_form_wrap > section > div.couponDescription__period > p:nth-child(4)")?.innerText.split("〜")[0] + " +0900");
+    let entryDateEndDate = new Date(document.querySelector("#regist_form_wrap > section > div.couponDescription__period > p:nth-child(4)")?.innerText.split("〜")[1] + " +0900");
+    let category = document.querySelector("#regist_form_wrap > section > div.couponDescription__detail.g-mrTop20 > div > div").innerText.match(/【.*】/);
     return {
         usagePeriod: {
             startDate: usagePeriodStartDate > hatsuneMikuBirthday ? usagePeriodStartDate : null,

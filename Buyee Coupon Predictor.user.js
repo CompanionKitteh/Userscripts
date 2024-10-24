@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      4.0
+// @version      4.1
 // @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @description  Predicts upcoming Buyee coupons
@@ -14,6 +14,7 @@
 
 // discountCode, marketplaceName, [discounts], discountType
 const marketplaces = [["mercariYYMM%%nn", "Mercari", [300, 600, 1000, 1500, 2500, 4000], "flat"],
+                      ["mercariYYMM%%nn", "Mercari %", [10, 15], "percent"],
                       ["yahooauctionYYMM%%nn", "Yahoo! JAPAN Auction", [5, 7, 9, 10, 12, 15, 20], "percent"],
                       ["rakutenYYMM%%nn", "Rakuten", [5, 10], "percent"]];
 const hatsuneMikuBirthday = new Date('2007-08-31');
@@ -90,11 +91,11 @@ function updateCouponInfo(discountCode, coupons, done) {
 // @return A pretty print of the coupon
 function prettyPrintCoupon(coupon) {
     let prettyPrint = `<strong>${coupon.discount}${coupon.discountType == "percent" ? "%" : ""} off `;
-    if (coupon.category) {
-        prettyPrint += `of ${coupon.category} `
-    }
     if (coupon.minimum) {
         prettyPrint += `of ${coupon.minimum} `
+    }
+    if (coupon.category) {
+        prettyPrint += `category ${coupon.category} `
     }
     prettyPrint += `</strong><a href=${coupon.url}>[link]</a>`
     if (coupon.usagePeriod.startDate) {

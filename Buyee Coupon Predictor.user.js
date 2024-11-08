@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      4.2
+// @version      4.3
 // @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @description  Predicts upcoming Buyee coupons
@@ -13,7 +13,7 @@
 // ==/UserScript==
 
 // discountId, discountCode, marketplaceName, [discounts], discountType
-const marketplaces = [["mercari_f", "mercariYYMM%%nn", "Mercari", [300, 600, 1000, 1500, 2500, 4000], "flat"],
+const marketplaces = [["mercari_f", "mercariYYMM%%nn", "Mercari", [300, 400, 600, 700, 1000, 1500, 2500, 4000], "flat"],
                       ["mercari_p", "mercariYYMM%%nn", "Mercari %", [10, 15], "percent"],
                       ["yahoojapanauction_p", "yahooauctionYYMM%%nn", "Yahoo! JAPAN Auction", [5, 7, 9, 10, 12, 15, 20], "percent"],
                       ["rakuten_p", "rakutenYYMM%%nn", "Rakuten", [5, 10], "percent"]];

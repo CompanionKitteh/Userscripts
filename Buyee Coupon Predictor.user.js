@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      4.4
+// @version      4.5
 // @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @description  Predicts upcoming Buyee coupons
@@ -15,10 +15,11 @@
 // discountId, discountCode, marketplaceName, [discounts], discountType
 const marketplaces = [["mercari_f", "mercariYYMM%%nn", "Mercari", [300, 400, 600, 700, 1000, 1500, 2500, 4000], "flat"],
                       ["mercari_p", "mercariYYMM%%nn", "Mercari %", [10, 15], "percent"],
-                      ["yahoojapanauction_p", "yahooauctionYYMM%%nn", "Yahoo! JAPAN Auction", [5, 7, 9, 10, 12, 15, 20], "percent"],
-                      ["yahoofleamarket_p", "yflemaYYMM%%nn", "Yahoo! Flea Market", [5, 10], "percent"],
-                      ["rakuten_p", "rakutenYYMM%%nn", "Rakuten", [5, 10], "percent"],
-                      ["rakuma_p", "rakumaYYMM%%nn", "Rakuma", [7, 10], "percent"]];
+                      ["yahoojapanauction_f", "yahooauctionYYMM%%nn", "Yahoo! JAPAN Auction", [300, 800, 2000, 5000, 12000], "flat"],
+                      ["yahoojapanauction_p", "yahooauctionYYMM%%nn", "Yahoo! JAPAN Auction %", [5, 7, 9, 10, 12, 15, 20], "percent"],
+                      ["yahoofleamarket_p", "yflemaYYMM%%nn", "Yahoo! Flea Market %", [5, 10], "percent"],
+                      ["rakuten_p", "rakutenYYMM%%nn", "Rakuten %", [5, 10], "percent"],
+                      ["rakuma_p", "rakumaYYMM%%nn", "Rakuma %", [7, 10], "percent"]];
 const hatsuneMikuBirthday = new Date('2007-08-31');
 
 (async () => {

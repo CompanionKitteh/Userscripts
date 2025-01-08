@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      4.8
+// @version      4.9
 // @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @description  Predicts upcoming Buyee coupons
@@ -17,7 +17,7 @@ const marketplaces = [["mercari_f", "mercariUSUKYYMM%%nn", "Mercari", [400, 500,
                       ["mercari_p", "mercariUSUKYYMM%%nn", "Mercari %", [10, 15], "percent"], // mercariYYMM%%nn
                       ["yahoojapanauction_f", "yahooauctionYYMM%%nn", "Yahoo! JAPAN Auction", [300, 800, 2000, 5000, 12000], "flat"],
                       ["yahoojapanauction_p", "yahooauctionYYMM%%nn", "Yahoo! JAPAN Auction %", [5, 7, 9, 10, 12, 15, 20], "percent"],
-                      ["jdirectitemsshopping_p", "jdshoppingYYMM%%nn", "JDirect Items Shopping %", [5, 10], "percent"],
+                      ["jdirectitemsshopping_p", "jdshoppingYYMM%%nn", "JDirect Items Shopping %", [5, 7, 10, 12, 15], "percent"],
                       ["rakuten_p", "rakutenYYMM%%nn", "Rakuten %", [5, 10], "percent"],
                       ["rakuma_p", "rakumaYYMM%%nn", "Rakuma %", [7, 10], "percent"]];
 const hatsuneMikuBirthday = new Date('2007-08-31');

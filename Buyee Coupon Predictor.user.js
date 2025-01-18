@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      4.10
+// @version      4.11
 // @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @description  Predicts upcoming Buyee coupons
@@ -22,6 +22,7 @@ const marketplaces = [["mercariusuk_f", "mercariUSUKYYMM%%nn", "Mercari US UK", 
                       ["jdirectitemsshopping_p", "jdshoppingYYMM%%nn", "JDirect Items Shopping %", [5, 7, 10, 12, 15], "percent"],
                       ["rakuten_p", "rakutenYYMM%%nn", "Rakuten %", [5, 10], "percent"],
                       ["rakuma_p", "rakumaYYMM%%nn", "Rakuma %", [5, 8, 10], "percent"]];
+const singleDigitCoupons = ["mercariusuk_f", "mercarihk_f"];
 const hatsuneMikuBirthday = new Date('2007-08-31');
 
 (async () => {
@@ -55,7 +56,7 @@ async function go(discountId, discountCode, discounts, discountType) {
             if (tries > 1) break;
             updateCouponInfo(discountId, coupons, false);
             let url = constructCouponUrl(discountCode, discounts[i], discountType);
-            url = url.replace("nn", (discountId == "mercari_f") ? zeroPad(couponNumber, 1) : zeroPad(couponNumber, 2));
+            url = url.replace("nn", singleDigitCoupons.includes(discountId) ? zeroPad(couponNumber, 1) : zeroPad(couponNumber, 2));
             console.log(`Trying URL: ${url}`);
             let siteHtml = await makeGetRequest(url);
             if (!isValidResponse(siteHtml)) {

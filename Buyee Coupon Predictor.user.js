@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      4.11
+// @version      4.12
 // @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @description  Predicts upcoming Buyee coupons
@@ -13,10 +13,10 @@
 // ==/UserScript==
 
 // discountId, discountCode, marketplaceName, [discounts], discountType
-const marketplaces = [["mercariusuk_f", "mercariUSUKYYMM%%nn", "Mercari US UK", [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat"],
-                      ["mercarihk_f", "mercariHKYYMM%%nn", "Mercari HK", [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat"],
-                      ["mercariusuk_p", "mercariUSUKYYMM%%nn", "Mercari % US UK", [10, 15], "percent"],
-                      ["mercarihk_p", "mercariHKYYMM%%nn", "Mercari % HK", [10, 15], "percent"],
+const marketplaces = [["mercariusuk_f", "mercariUSUKYYMM%%nn", "Mercari (for US and UK users)", [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat"],
+                      ["mercarihk_f", "mercariHKYYMM%%nn", "Mercari (for HK users)", [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat"],
+                      ["mercariusuk_p", "mercariUSUKYYMM%%nn", "Mercari % (for US and UK users)", [10, 15], "percent"],
+                      ["mercarihk_p", "mercariHKYYMM%%nn", "Mercari % (for HK users)", [10, 15], "percent"],
                       ["yahoojapanauction_f", "yahooauctionYYMM%%nn", "Yahoo! JAPAN Auction", [300, 800, 2000, 5000, 12000], "flat"],
                       ["yahoojapanauction_p", "yahooauctionYYMM%%nn", "Yahoo! JAPAN Auction %", [5, 7, 9, 10, 12, 15, 20], "percent"],
                       ["jdirectitemsshopping_p", "jdshoppingYYMM%%nn", "JDirect Items Shopping %", [5, 7, 10, 12, 15], "percent"],

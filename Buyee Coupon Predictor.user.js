@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      4.12
+// @version      5.0
 // @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @description  Predicts upcoming Buyee coupons
@@ -12,51 +12,81 @@
 // @connect      https://buyee.jp/coupon?code=*
 // ==/UserScript==
 
-// discountId, discountCode, marketplaceName, [discounts], discountType
-const marketplaces = [["mercariusuk_f", "mercariUSUKYYMM%%nn", "Mercari (for US and UK users)", [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat"],
-                      ["mercarihk_f", "mercariHKYYMM%%nn", "Mercari (for HK users)", [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat"],
-                      ["mercariusuk_p", "mercariUSUKYYMM%%nn", "Mercari % (for US and UK users)", [10, 15], "percent"],
-                      ["mercarihk_p", "mercariHKYYMM%%nn", "Mercari % (for HK users)", [10, 15], "percent"],
-                      ["yahoojapanauction_f", "yahooauctionYYMM%%nn", "Yahoo! JAPAN Auction", [300, 800, 2000, 5000, 12000], "flat"],
-                      ["yahoojapanauction_p", "yahooauctionYYMM%%nn", "Yahoo! JAPAN Auction %", [5, 7, 9, 10, 12, 15, 20], "percent"],
-                      ["jdirectitemsshopping_p", "jdshoppingYYMM%%nn", "JDirect Items Shopping %", [5, 7, 10, 12, 15], "percent"],
-                      ["rakuten_p", "rakutenYYMM%%nn", "Rakuten %", [5, 10], "percent"],
-                      ["rakuma_p", "rakumaYYMM%%nn", "Rakuma %", [5, 8, 10], "percent"]];
-const singleDigitCoupons = ["mercariusuk_f", "mercarihk_f"];
+const debug = false;
+
+class CouponCategory {
+    // @param discountId A string representing the internal discount ID (for this userscript)
+    // @param discountCode A string representing the URL format of the coupon ID
+    // @param marketplaceName A string representing the display name of the coupons
+    // @param discounts An array of integers representing the discount values
+    // @param discountType A string representing the type of discount (flat discount or percentage discount)
+    // @param couponNumberPadding A number representing the length to pad the coupon number to
+    // @param shouldShow A boolean representing whether or not to show the coupon
+    constructor(discountId, discountCode, marketplaceName, discounts, discountType, couponNumberPadding, shouldShow) {
+        this.discountId = discountId;
+        this.discountCode = discountCode;
+        this.marketplaceName = marketplaceName;
+        this.discounts = discounts;
+        this.discountType = discountType;
+        this.couponNumberPadding = couponNumberPadding;
+        this.shouldShow = shouldShow;
+    }
+}
+
+const couponCategories = [new CouponCategory("mercariusuk_f", "mercariUSUKYYMM%%nn", "Mercari (for US and UK users)",
+                                             [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat", 1, true),
+                          new CouponCategory("mercariusuk_p", "mercariUSUKYYMM%%nn", "Mercari % (for US and UK users)",
+                                             [10, 15], "percent", 2, true),
+                          new CouponCategory("mercarihk_f", "mercariHKYYMM%%nn", "Mercari (for HK users)",
+                                             [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat", 1, true),
+                          new CouponCategory("mercarihk_p", "mercariHKYYMM%%nn", "Mercari % (for HK users)",
+                                             [10, 15], "percent", 2, true),
+                          new CouponCategory("yahoojapanauction_f", "yahooauctionYYMM%%nn", "Yahoo! JAPAN Auction",
+                                             [300, 800, 2000, 5000, 12000], "flat", 2, true),
+                          new CouponCategory("yahoojapanauction_p", "yahooauctionYYMM%%nn", "Yahoo! JAPAN Auction %",
+                                             [5, 7, 9, 10, 12, 15, 20], "percent", 2, true),
+                          new CouponCategory("jdirectitemsshopping_p", "jdshoppingYYMM%%nn", "JDirect Items Shopping %",
+                                             [5, 7, 10, 12, 15], "percent", 2, true),
+                          new CouponCategory("rakuten_p", "rakutenYYMM%%nn", "Rakuten %",
+                                             [5, 10], "percent", 2, true),
+                          new CouponCategory("rakuma_p", "rakumaYYMM%%nn", "Rakuma %",
+                                             [5, 8, 10], "percent", 2, true)];
 const hatsuneMikuBirthday = new Date('2007-08-31');
 
 (async () => {
-    for (let i = 0; i < marketplaces.length; i++) {
-        let discountId = marketplaces[i][0];
-        let discountCode = marketplaces[i][1];
-        let marketplaceName = marketplaces[i][2];
-        let discounts = marketplaces[i][3];
-        let discountType = marketplaces[i][4];
-        let infoCoupon = `<section id="coupon_" class="mycoupon infoCoupon infoCoupon${discountId}"><h2 class="shopping_cart_name bg_red">` +
-            `Upcoming Coupons - ${marketplaceName}` +
+    // Iterage through all categories
+    for (let couponCategory of couponCategories) {
+        if (!couponCategory.shouldShow && !debug) {
+            continue;
+        }
+        let infoCoupon = `<section id="coupon_" class="mycoupon infoCoupon infoCoupon${couponCategory.discountId}"><h2 class="shopping_cart_name bg_red">` +
+            `Upcoming Coupons - ${couponCategory.marketplaceName}` +
             '</h2><ul><li><div class="coupon_area"><div class="description_area"><dl><dt>' +
             'Coupon Information' +
             '</dt><dd>' +
             'No data...' +
             '</dd></dl></div><div class="information_area"><dl><dd class="bold coupon-amount">' +
             '0<span>&nbsp;FOUND</span>' +
-            `</dd></dl><button type="button" class="btn btn_ok infoCouponButton infoCouponButton${discountId}"><i>` +
+            `</dd></dl><button type="button" class="btn btn_ok infoCouponButton infoCouponButton${couponCategory.discountId}"><i>` +
             'Search for Coupons' +
             '</i></button></div></div></li></ul></section>';
         document.querySelector("#content_inner > div > nav").insertAdjacentHTML("afterend", infoCoupon);
-        document.getElementsByClassName(`infoCouponButton${discountId}`)[0].addEventListener("click", () => { go(discountId, discountCode, discounts, discountType) });
+        document.getElementsByClassName(`infoCouponButton${couponCategory.discountId}`)[0].addEventListener("click", () => { go(couponCategory) });
     }
 })();
 
-async function go(discountId, discountCode, discounts, discountType) {
+async function go(couponCategory) {
     let coupons = [];
-    for (let i = 0; i < discounts.length; i++) {
+    // Iterate through all discounts
+    for (let discountIndex = 0; discountIndex < couponCategory.discounts.length; discountIndex++) {
         let tries = 0;
+        // Look for all instances of a discount
         for (let couponNumber = 1; ; couponNumber++) {
-            if (tries > 1) break;
-            updateCouponInfo(discountId, coupons, false);
-            let url = constructCouponUrl(discountCode, discounts[i], discountType);
-            url = url.replace("nn", singleDigitCoupons.includes(discountId) ? zeroPad(couponNumber, 1) : zeroPad(couponNumber, 2));
+            if (tries > 1) {
+                break;
+            }
+            updateCouponInfo(couponCategory.discountId, coupons, false);
+            let url = constructCouponUrl(couponCategory, discountIndex, couponNumber);
             console.log(`Trying URL: ${url}`);
             let siteHtml = await makeGetRequest(url);
             if (!isValidResponse(siteHtml)) {
@@ -66,12 +96,12 @@ async function go(discountId, discountCode, discounts, discountType) {
             } else {
                 tries = 0;
             }
-            let coupon = parseCoupon(siteHtml, discountId, discountCode, discountType, url);
+            let coupon = parseCoupon(siteHtml, couponCategory, url);
             console.log(coupon);
             coupons.push(coupon);
         }
     }
-    updateCouponInfo(discountId, coupons, true);
+    updateCouponInfo(couponCategory.discountId, coupons, true);
     console.log("Done.");
 }
 
@@ -122,15 +152,16 @@ function zeroPad(string, zeroes) {
     return ("0".repeat(zeroes) + string).slice(-zeroes);
 }
 
-// @param discountCode A discount code
-// @param discount A coupon discount
-// @param discountType The type of discount
+// @param couponCategory A coupon category
+// @param discountIndex The index of the discount
+// @param couponNumber The coupon number
 // @return A coupon URL of form https://buyee.jp/coupon?code=*
-function constructCouponUrl(discountCode, discount, discountType) {
-    let year = zeroPad(new Date().getYear(), 2);
-    let month = zeroPad(new Date().getMonth() + 1, 2);
-    if (discountType == "percent") discount = zeroPad(discount, 2);
-    let code = discountCode.replace("YY", year).replace("MM", month).replace("%%", discount);
+function constructCouponUrl(couponCategory, discountIndex, couponNumber) {
+    let code = couponCategory.discountCode
+            .replace("YY", zeroPad(new Date().getYear(), 2))
+            .replace("MM", zeroPad(new Date().getMonth() + 1, 2))
+            .replace("%%", couponCategory.discountType == "percent" ? zeroPad(couponCategory.discounts[discountIndex], 2) : couponCategory.discounts[discountIndex])
+            .replace("nn", zeroPad(couponNumber, couponCategory.couponNumberPadding));
     return `https://buyee.jp/coupon?code=${code}`;
 }
 
@@ -155,12 +186,10 @@ function isValidResponse(siteHtml) {
 }
 
 // @param siteHtml A page's HTML
-// @param discountId A discount ID
-// @param discountCode A discount code
-// @param discountType The type of discount
+// @param couponCategory A coupon category
 // @param url The page's URL
 // @return An object containing the coupon information
-function parseCoupon(siteHtml, discountId, discountCode, discountType, url) {
+function parseCoupon(siteHtml, couponCategory, url) {
     const document = new DOMParser().parseFromString(siteHtml, "text/html");
     let usagePeriodStartDate = new Date(document.querySelector(".couponDescription__period > p:nth-child(2)")?.innerText.split("〜")[0] + " +0900");
     let usagePeriodEndDate = new Date(document.querySelector(".couponDescription__period > p:nth-child(2)")?.innerText.split("〜")[1] + " +0900");
@@ -180,9 +209,9 @@ function parseCoupon(siteHtml, discountId, discountCode, discountType, url) {
         category: category ? category[0] : null,
         minimum: minimum ? minimum[0] : null,
         discount: document.querySelector(".off_strong").innerText,
-        discountId: discountId,
-        discountCode: discountCode,
-        discountType: discountType,
+        discountId: couponCategory.discountId,
+        discountCode: couponCategory.discountCode,
+        discountType: couponCategory.discountType,
         url: url,
     };
 }

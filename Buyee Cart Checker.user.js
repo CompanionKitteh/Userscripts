@@ -1,7 +1,9 @@
 // ==UserScript==
 // @name         Buyee Cart Checker
 // @namespace    http://companionkitteh.com/
-// @version      0.6
+// @version      1.0
+// @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Cart%20Checker.user.js
+// @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Cart%20Checker.user.js
 // @description  Checks items in cart for new prices and status
 // @author       CompanionKitteh
 // @match        https://buyee.jp/myshopping/cart

@@ -1,7 +1,9 @@
 // ==UserScript==
 // @name         Buyee Cart Clicker
 // @namespace    http://companionkitteh.com/
-// @version      0.2
+// @version      1.0
+// @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Cart%20Clicker.user.js
+// @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Cart%20Clicker.user.js
 // @description  It clicks
 // @author       CompanionKitteh
 // @match        https://buyee.jp/myshopping/cart

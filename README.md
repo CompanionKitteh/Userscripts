@@ -8,10 +8,12 @@ What stuff does:
     - Adds functionality to the cart (`/myshopping/cart`) to crawl listings to see if the price has changed (marked in blue) or if the item has been deleted or bought (marked in red), only tested on Mercari listings
   - [Buyee Cart Clicker.user.js](Buyee%20Cart%20Clicker.user.js)
     - Automatically expands cart page (`/myshopping/cart`) to show all items
+  - [Buyee Coupon Deletebuttonizer.user.js](Buyee%20Coupon%20Deletebuttonizer.user.js)
+    - Enables the delete button on expired coupons on (`/mycoupon/list`)
   - [Buyee Coupon Informationizer.user.js](Buyee%20Coupon%20Informationizer.user.js)
     - Updates coupon titles with more information about the coupon on (`/mycoupon/unissuedlist` and `/mycoupon/list`)
   - [Buyee Coupon Predictor.user.js](Buyee%20Coupon%20Predictor.user.js)
-    - Crawls predicted coupon pages to find undistributed coupons (`/mycoupon/unissuedlist` and `/mycoupon/list`)
+    - Crawls predicted coupon pages to find undistributed coupons (`/mycoupon/unissuedlist`)
   - [Buyee Orders Expander.user.js](Buyee%20Orders%20Expander.user.js)
     - Automatically expands orders page (`/myshopping/orders`) to show all items
 - `danbooru.donmai.us`

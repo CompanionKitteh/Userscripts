@@ -1,7 +1,9 @@
 // ==UserScript==
 // @name         Danbooru Viewed Hider
 // @namespace    http://companionkitteh.com/
-// @version      0.1
+// @version      1.0
+// @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Danbooru%20Viewed%20Hider.user.js
+// @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Danbooru%20Viewed%20Hider.user.js
 // @description  Hides viewed Danbooru posts
 // @author       CompanionKitteh
 // @match        https://danbooru.donmai.us/*

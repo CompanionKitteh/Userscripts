@@ -1,7 +1,9 @@
 // ==UserScript==
 // @name         Buyee Coupon Informationizer
 // @namespace    http://companionkitteh.com/
-// @version      0.1
+// @version      1.0
+// @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Informationizer.user.js
+// @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Informationizer.user.js
 // @description  Updates coupons with more information
 // @author       CompanionKitteh
 // @match        https://buyee.jp/mycoupon/*

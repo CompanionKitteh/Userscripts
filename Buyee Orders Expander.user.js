@@ -1,7 +1,9 @@
 // ==UserScript==
 // @name         Buyee Orders Expander
 // @namespace    http://companionkitteh.com/
-// @version      0.1
+// @version      1.0
+// @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Orders%20Expander.user.js
+// @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Orders%20Expander.user.js
 // @description  Automatically expand orders page
 // @author       CompanionKitteh
 // @match        https://buyee.jp/myshopping/orders*

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      5.0
+// @version      5.1
 // @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @description  Predicts upcoming Buyee coupons
@@ -36,6 +36,10 @@ class CouponCategory {
 const couponCategories = [new CouponCategory("mercariusuk_f", "mercariUSUKYYMM%%nn", "Mercari (for US and UK users)",
                                              [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat", 1, true),
                           new CouponCategory("mercariusuk_p", "mercariUSUKYYMM%%nn", "Mercari % (for US and UK users)",
+                                             [10, 15], "percent", 2, true),
+                          new CouponCategory("mercarius_f", "mercariUSYYMM%%nn", "Mercari (for US users)",
+                                             [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat", 1, true),
+                          new CouponCategory("mercarius_p", "mercariUSYYMM%%nn", "Mercari % (for US users)",
                                              [10, 15], "percent", 2, true),
                           new CouponCategory("mercarihk_f", "mercariHKYYMM%%nn", "Mercari (for HK users)",
                                              [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat", 1, true),
@@ -82,7 +86,7 @@ async function go(couponCategory) {
         let tries = 0;
         // Look for all instances of a discount
         for (let couponNumber = 1; ; couponNumber++) {
-            if (tries > 1) {
+            if (tries > 2) {
                 break;
             }
             updateCouponInfo(couponCategory.discountId, coupons, false);

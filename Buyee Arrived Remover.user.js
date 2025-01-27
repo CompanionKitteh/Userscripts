@@ -1,7 +1,9 @@
 // ==UserScript==
 // @name         Buyee Arrived Remover
 // @namespace    http://companionkitteh.com/
-// @version      0.1
+// @version      1.0
+// @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Arrived%20Remover.user.js
+// @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Arrived%20Remover.user.js
 // @description  Removed arrived items from orders page
 // @author       CompanionKitteh
 // @match        https://buyee.jp/myshopping/orders*

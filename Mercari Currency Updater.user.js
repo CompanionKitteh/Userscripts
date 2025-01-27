@@ -1,7 +1,9 @@
 // ==UserScript==
 // @name         Mercari Currency Updater
 // @namespace    http://companionkitteh.com/
-// @version      0.2
+// @version      1.0
+// @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Mercari%20Currency%20Updater.user.js
+// @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Mercari%20Currency%20Updater.user.js
 // @description  Show JPY item price
 // @author       CompanionKitteh
 // @match        https://jp.mercari.com/search*

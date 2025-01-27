@@ -1,12 +1,12 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      5.1
+// @version      5.2
 // @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @description  Predicts upcoming Buyee coupons
 // @author       CompanionKitteh
-// @match        https://buyee.jp/mycoupon/*
+// @match        https://buyee.jp/mycoupon/unissuedlist
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=buyee.jp
 // @grant        GM_xmlhttpRequest
 // @connect      https://buyee.jp/coupon?code=*

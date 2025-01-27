@@ -1,7 +1,9 @@
 // ==UserScript==
 // @name         Mercari Comment Bringer Backer
 // @namespace    http://companionkitteh.com/
-// @version      0.1
+// @version      1.0
+// @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Mercari%20Comment%20Bringer%20Backer.user.js
+// @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Mercari%20Comment%20Bringer%20Backer.user.js
 // @description  Shows comments on Mercari listings
 // @author       CompanionKitteh
 // @match        https://jp.mercari.com/item/*

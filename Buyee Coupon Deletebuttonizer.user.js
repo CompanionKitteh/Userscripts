@@ -1,7 +1,9 @@
 // ==UserScript==
 // @name         Buyee Coupon Deletebuttonizer
 // @namespace    http://companionkitteh.com/
-// @version      0.1
+// @version      1.0
+// @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Deletebuttonizer.user.js
+// @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Deletebuttonizer.user.js
 // @description  Enables the delete button for expired coupons
 // @author       CompanionKitteh
 // @match        https://buyee.jp/mycoupon/list

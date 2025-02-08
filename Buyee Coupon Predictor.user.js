@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      5.2
+// @version      5.3
 // @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @description  Predicts upcoming Buyee coupons
@@ -33,9 +33,9 @@ class CouponCategory {
     }
 }
 
-const couponCategories = [new CouponCategory("mercariusuk_f", "mercariUSUKYYMM%%nn", "Mercari (for US and UK users)",
+const couponCategories = [new CouponCategory("mercariusuk_f", "mercariUKITNLAUSDECAYYMM%%nn", "Mercari (for UK, IT, NL, AUS, DE, and CA users)",
                                              [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat", 1, true),
-                          new CouponCategory("mercariusuk_p", "mercariUSUKYYMM%%nn", "Mercari % (for US and UK users)",
+                          new CouponCategory("mercariusuk_p", "mercariUKITNLAUSDECAYYMM%%nn", "Mercari % (for UK, IT, NL, AUS, DE, and CA users)",
                                              [10, 15], "percent", 2, true),
                           new CouponCategory("mercarius_f", "mercariUSYYMM%%nn", "Mercari (for US users)",
                                              [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat", 1, true),
@@ -45,9 +45,9 @@ const couponCategories = [new CouponCategory("mercariusuk_f", "mercariUSUKYYMM%%
                                              [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat", 1, true),
                           new CouponCategory("mercarihk_p", "mercariHKYYMM%%nn", "Mercari % (for HK users)",
                                              [10, 15], "percent", 2, true),
-                          new CouponCategory("yahoojapanauction_f", "yahooauctionYYMM%%nn", "Yahoo! JAPAN Auction",
+                          new CouponCategory("jdirectitemsauction_f", "jdiauctionYYMM%%nn", "JDirect Items Auction",
                                              [300, 800, 2000, 5000, 12000], "flat", 2, true),
-                          new CouponCategory("yahoojapanauction_p", "yahooauctionYYMM%%nn", "Yahoo! JAPAN Auction %",
+                          new CouponCategory("jdirectitemsauction_p", "jdiauctionYYMM%%nn", "JDirect Items Auction %",
                                              [5, 7, 9, 10, 12, 15, 20], "percent", 2, true),
                           new CouponCategory("jdirectitemsshopping_p", "jdshoppingYYMM%%nn", "JDirect Items Shopping %",
                                              [5, 7, 10, 12, 15], "percent", 2, true),

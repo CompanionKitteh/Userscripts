@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      5.3
+// @version      5.4
 // @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @description  Predicts upcoming Buyee coupons
@@ -33,10 +33,10 @@ class CouponCategory {
     }
 }
 
-const couponCategories = [new CouponCategory("mercariusuk_f", "mercariUKITNLAUSDECAYYMM%%nn", "Mercari (for UK, IT, NL, AUS, DE, and CA users)",
-                                             [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat", 1, true),
-                          new CouponCategory("mercariusuk_p", "mercariUKITNLAUSDECAYYMM%%nn", "Mercari % (for UK, IT, NL, AUS, DE, and CA users)",
-                                             [10, 15], "percent", 2, true),
+const couponCategories = [new CouponCategory("mercari_f", "mercariYYMM%%nn", "Mercari",
+                                              [1000, 2000, 5000], "flat", 1, true),
+                          new CouponCategory("mercari_p", "mercariYYMM%%nn", "Mercari %",
+                                              [5, 8, 10, 15], "percent", 2, true),
                           new CouponCategory("mercarius_f", "mercariUSYYMM%%nn", "Mercari (for US users)",
                                              [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat", 1, true),
                           new CouponCategory("mercarius_p", "mercariUSYYMM%%nn", "Mercari % (for US users)",
@@ -48,11 +48,13 @@ const couponCategories = [new CouponCategory("mercariusuk_f", "mercariUKITNLAUSD
                           new CouponCategory("jdirectitemsauction_f", "jdiauctionYYMM%%nn", "JDirect Items Auction",
                                              [300, 800, 2000, 5000, 12000], "flat", 2, true),
                           new CouponCategory("jdirectitemsauction_p", "jdiauctionYYMM%%nn", "JDirect Items Auction %",
-                                             [5, 7, 9, 10, 12, 15, 20], "percent", 2, true),
-                          new CouponCategory("jdirectitemsshopping_p", "jdshoppingYYMM%%nn", "JDirect Items Shopping %",
-                                             [5, 7, 10, 12, 15], "percent", 2, true),
+                                             [5, 8, 10], "percent", 2, true),
+                          new CouponCategory("jdirectitemsshopping_p", "jdshopping_nYYMM%%nn", "JDirect Items Shopping %",
+                                             [5, 8, 10], "percent", 2, true),
+                          new CouponCategory("jdirectitemsfleamarket_p", "jdIflema_nYYMM%%nn", "JDirect Items Fleamarket %",
+                                             [5, 8, 10], "percent", 2, true),
                           new CouponCategory("rakuten_p", "rakutenYYMM%%nn", "Rakuten %",
-                                             [5, 10], "percent", 2, true),
+                                             [5, 8, 10], "percent", 2, true),
                           new CouponCategory("rakuma_p", "rakumaYYMM%%nn", "Rakuma %",
                                              [5, 8, 10], "percent", 2, true)];
 const hatsuneMikuBirthday = new Date('2007-08-31');

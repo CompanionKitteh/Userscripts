@@ -15,7 +15,7 @@ What stuff does:
   - [Buyee Coupon Predictor.user.js](Buyee%20Coupon%20Predictor.user.js)
     - Crawls predicted coupon pages to find undistributed coupons (`/mycoupon/unissuedlist`)
   - [Buyee Orders Expander.user.js](Buyee%20Orders%20Expander.user.js)
-    - Automatically expands orders page (`/myshopping/orders`) to show all items
+    - Automatically expands orders pages (`/myshopping/orders`, `/myurlpurchase/orders`, and `/myorders/bids/successful`) to show all items
 - `danbooru.donmai.us`
   - [Danbooru Viewed Hider.user.js](Danbooru%20Viewed%20Hider.user.js)
     - Adds a filter to hide already viewed images

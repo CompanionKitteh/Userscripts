@@ -3,7 +3,7 @@ This is a repository to store userscripts I write. Feel free to use them or modi
 What stuff does:
 - `buyee.jp`
   - [Buyee Arrived Remover.user.js](Buyee%20Arrived%20Remover.user.js)
-    - Removes items that are already marked as arrived (or cancelled) from the orders (`/myshopping/orders`) page
+    - Removes items that are already marked as arrived (or cancelled) from the orders (`/myshopping/orders`, `/myurlpurchase/orders`, and `/myorders/bids/successful`) pages
   - [Buyee Cart Checker.user.js](Buyee%20Cart%20Checker.user.js)
     - Adds functionality to the cart (`/myshopping/cart`) to crawl listings to see if the price has changed (marked in blue) or if the item has been deleted or bought (marked in red), only tested on Mercari listings
   - [Buyee Cart Clicker.user.js](Buyee%20Cart%20Clicker.user.js)

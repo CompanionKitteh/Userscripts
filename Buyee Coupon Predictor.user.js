@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      5.4
+// @version      5.5
 // @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @description  Predicts upcoming Buyee coupons
@@ -34,15 +34,19 @@ class CouponCategory {
 }
 
 const couponCategories = [new CouponCategory("mercari_f", "mercariYYMM%%nn", "Mercari",
-                                              [1000, 2000, 5000], "flat", 1, true),
+                                              [500, 1000, 2000, 5000], "flat", 1, true),
                           new CouponCategory("mercari_p", "mercariYYMM%%nn", "Mercari %",
                                               [5, 8, 10, 15], "percent", 2, true),
+                          new CouponCategory("mercarietc_f", "mercariUKNLAUSDEITCAYYMM%%nn", "Mercari (for UK, NL, AUS, DE, IT, CA)",
+                                              [500, 1000, 2000, 5000], "flat", 1, true),
+                          new CouponCategory("mercarietc_p", "mercariUKNLAUSDEITCAYYMM%%nn", "Mercari % (for UK, NL, AUS, DE, IT, CA)",
+                                              [5, 8, 10, 15], "percent", 2, true),
                           new CouponCategory("mercarius_f", "mercariUSYYMM%%nn", "Mercari (for US users)",
-                                             [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat", 1, true),
+                                             [500, 1000, 2000, 5000], "flat", 1, true),
                           new CouponCategory("mercarius_p", "mercariUSYYMM%%nn", "Mercari % (for US users)",
                                              [10, 15], "percent", 2, true),
                           new CouponCategory("mercarihk_f", "mercariHKYYMM%%nn", "Mercari (for HK users)",
-                                             [400, 500, 1000, 1500, 2000, 3500, 4000, 6000], "flat", 1, true),
+                                             [500, 1000, 2000, 5000], "flat", 1, true),
                           new CouponCategory("mercarihk_p", "mercariHKYYMM%%nn", "Mercari % (for HK users)",
                                              [10, 15], "percent", 2, true),
                           new CouponCategory("jdirectitemsauction_f", "jdiauctionYYMM%%nn", "JDirect Items Auction",

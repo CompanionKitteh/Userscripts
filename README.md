@@ -13,7 +13,9 @@ What stuff does:
   - [Buyee Coupon Informationizer.user.js](Buyee%20Coupon%20Informationizer.user.js)
     - Updates coupon titles with more information about the coupon on (`/mycoupon/unissuedlist` and `/mycoupon/list`)
   - [Buyee Coupon Predictor.user.js](Buyee%20Coupon%20Predictor.user.js)
-    - Crawls predicted coupon pages to find undistributed coupons (`/mycoupon/unissuedlist`)
+    - Crawls predicted coupon pages to find undistributed coupons on (`/mycoupon/unissuedlist`)
+  - [Buyee Invoice Selectifier.user.js](Buyee%20Invoice%20Selectifier.user.js)
+    - Allows searchable dropdowns on (`/mybaggages/invoice`)
   - [Buyee Orders Expander.user.js](Buyee%20Orders%20Expander.user.js)
     - Automatically expands orders pages (`/myshopping/orders`, `/myurlpurchase/orders`, and `/myorders/bids/successful`) to show all items
 - `danbooru.donmai.us`

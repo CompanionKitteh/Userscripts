@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Buyee Coupon Predictor
 // @namespace    http://companionkitteh.com/
-// @version      5.5
+// @version      5.6
 // @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Buyee%20Coupon%20Predictor.user.js
 // @description  Predicts upcoming Buyee coupons
@@ -42,9 +42,9 @@ const couponCategories = [new CouponCategory("mercari_f", "mercariYYMM%%nn", "Me
                           new CouponCategory("mercarietc_p", "mercariUKNLAUSDEITCAYYMM%%nn", "Mercari % (for UK, NL, AUS, DE, IT, CA)",
                                               [5, 8, 10, 15], "percent", 2, true),
                           new CouponCategory("mercarius_f", "mercariUSYYMM%%nn", "Mercari (for US users)",
-                                             [500, 1000, 2000, 5000], "flat", 1, true),
+                                             [500, 1000, 1200, 1500, 2000, 5000], "flat", 1, true),
                           new CouponCategory("mercarius_p", "mercariUSYYMM%%nn", "Mercari % (for US users)",
-                                             [10, 15], "percent", 2, true),
+                                             [10, 12, 15], "percent", 2, true),
                           new CouponCategory("mercarihk_f", "mercariHKYYMM%%nn", "Mercari (for HK users)",
                                              [500, 1000, 2000, 5000], "flat", 1, true),
                           new CouponCategory("mercarihk_p", "mercariHKYYMM%%nn", "Mercari % (for HK users)",

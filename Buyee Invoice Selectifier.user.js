@@ -15,6 +15,9 @@
 // @grant        GM_getResourceText
 // ==/UserScript==
 
+console.log("Buyee Invoice Selectifier is deprecated.");
+
+/*
 function select2ify(jNode) {
     jNode[0].classList.add('select2ified');
     jNode.select2({width: '100%'});
@@ -23,3 +26,4 @@ function select2ify(jNode) {
 
 GM_addStyle(GM_getResourceText('select2css'));
 waitForKeyElements('[id^=invoice_itemType_]:not(.select2ified)', select2ify);
+*/

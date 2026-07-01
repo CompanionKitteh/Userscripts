@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Mercari Comment Bringer Backer
 // @namespace    http://companionkitteh.com/
-// @version      1.0
+// @version      1.1
 // @downloadURL  https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Mercari%20Comment%20Bringer%20Backer.user.js
 // @updateURL    https://github.com/CompanionKitteh/Userscripts/raw/refs/heads/main/Mercari%20Comment%20Bringer%20Backer.user.js
 // @description  Shows comments on Mercari listings
@@ -36,7 +36,7 @@ function processApiResponse(apiResponse) {
     waitForKeyElements("#item-info > section:nth-child(5)", parseComments);
 }
 
-// @param jNode The node to insert coupon information after
+// @param jNode The node to insert comment information after
 function parseComments(jNode) {
     let commentSection = `<h2>Comments (${comments.length})</h2><br>`;
     for (let i = 0; i < comments.length; i++) {
